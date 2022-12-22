@@ -8,16 +8,11 @@ const Description: React.FC = () => {
         <li>I mainly work on websites, specifically the front-end.</li>
         <li>I mainly use React, but I usually try using other stuff too.</li>
         <li>
-          I love Typescript, I dislike building libraries with it {"("}the jump
-          from user to creator is steep{")"}.
-        </li>
-        <li>
-          I had dropped out of high school, now working full-time on my coding
-          skills.
+          I&apos;m self-thaught! I had dropped out of high school, and I&apos;ve
+          been teaching myself ever since.
         </li>
         <li>When I&apos;m not programming you can usually catch me gaming.</li>
         <li>I live in the Philippines!</li>
-        <li>Pixel art is fun</li>
       </ul>
     </main>
   );

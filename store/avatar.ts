@@ -8,7 +8,7 @@ export type AvatorStore = {
   change: Action<AvatarState>;
 };
 
-export const useAvatar = create<AvatorStore>()((set) => ({
+export const useAvatarStore = create<AvatorStore>()((set) => ({
   state: "idle",
   change: (payload) => {
     set({ state: payload });
