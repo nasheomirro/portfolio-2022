@@ -1,15 +1,17 @@
+import { useEffect } from "react";
+import { useInfoStore } from "~/store/weather";
+import { getData, ReturnData } from "~/store/getData";
+
 import Header from "~/content/Header";
 import Sidebar from "~/content/Sidebar";
 import Description from "~/content/Description";
-import { useWeatherStore, Weather } from "~/store/weather";
-import { useEffect } from "react";
 
-export default function Home({ weather }: { weather: Weather }) {
-  const hydrateWeather = useWeatherStore((state) => state.setCurrent);
+export default function Home({ info }: ReturnData) {
+  const hydrateInfoStore = useInfoStore((state) => state.setCurrent);
 
   useEffect(() => {
-    hydrateWeather(weather);
-  }, [hydrateWeather, weather]);
+    hydrateInfoStore(info);
+  }, [hydrateInfoStore, info]);
 
   return (
     <div className="max-w-lg sm:max-w-xl md:max-w-screen-lg mx-auto px-6 min-h-screen flex mt-40">
@@ -24,19 +26,5 @@ export default function Home({ weather }: { weather: Weather }) {
 }
 
 export async function getServerSideProps() {
-  // fetch philippine weather
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=12.8797&lon=121.7740&appid=${process.env.WEATHER_API_KEY}`
-  );
-  const weatherData = await res.json();
-  const weather: Weather = {
-    name: weatherData.name,
-    ...weatherData.weather[0],
-    measurements: {
-      humidity: weatherData.main.humidity,
-      pressure: weatherData.main.pressure,
-      temp: weatherData.main.temp,
-    },
-  };
-  return { props: { weather } };
+  return getData();
 }
