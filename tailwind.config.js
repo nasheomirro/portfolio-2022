@@ -3,13 +3,13 @@ module.exports = {
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "./content/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {},
     colors: {
       background: {
-        300: "#0f0e11",
+        300: "#0f0e0a",
         200: "#242039",
         100: "#2a2b47",
       },

@@ -1,30 +1,36 @@
-import { useEffect } from "react";
-import { useInfoStore } from "~/store/weather";
-import { getData, ReturnData } from "~/store/getData";
+import Sidebar from "~/app/sidebar";
+import Main from "~/app/main";
+import { fetchWeatherData } from "~/stores/weather/data";
+import { WeatherProvider, WeatherType } from "~/stores/weather";
+import { fetchCurrentTimeData } from "~/stores/current-time/data";
+import { TimeProvider } from "~/stores/current-time";
 
-import Header from "~/content/Header";
-import Sidebar from "~/content/Sidebar";
-import Description from "~/content/Description";
+type Props = {
+  weather: WeatherType;
+  time: string;
+};
 
-export default function Home({ info }: ReturnData) {
-  const hydrateInfoStore = useInfoStore((state) => state.setCurrent);
-
-  useEffect(() => {
-    hydrateInfoStore(info);
-  }, [hydrateInfoStore, info]);
-
+export default function Home({ weather, time }: Props) {
   return (
-    <div className="max-w-lg sm:max-w-xl md:max-w-screen-lg mx-auto px-6 min-h-screen flex mt-40">
-      <Sidebar />
-      <div className="md:w-2/3 md:pl-6 xl:w-3/4 xl:pl-8">
-        <Header />
-        <Description />
-        <div className="h-screen" />
-      </div>
-    </div>
+    <WeatherProvider value={weather}>
+      <TimeProvider value={time}>
+        <div className="max-w-lg sm:max-w-xl md:max-w-screen-lg mx-auto px-6 min-h-screen flex mt-40">
+          <Sidebar />
+          <Main />
+        </div>
+      </TimeProvider>
+    </WeatherProvider>
   );
 }
 
 export async function getServerSideProps() {
-  return getData();
+  // fetch both
+  const fetchWeather = fetchWeatherData();
+  const fetchTime = fetchCurrentTimeData();
+
+  // then wait for each
+  const weather = await fetchWeather;
+  const time = await fetchTime;
+
+  return { props: { weather, time } };
 }

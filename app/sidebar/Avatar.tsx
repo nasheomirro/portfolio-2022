@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { AvatarState, useAvatarStore } from "~/store/avatar";
+import { useState } from "react";
+import { AvatarState, useAvatarStore } from "~/stores/avatar";
 
 import IdleImg from "~/public/blink.gif";
 import QuestionImg from "~/public/question.jpeg";
 import LookImg from "~/public/look.jpeg";
-import { useRef, useState } from "react";
 
 const stateToPath: { [key in AvatarState]: any } = {
   idle: IdleImg,
@@ -17,7 +17,7 @@ const Avatar = () => {
   const [lookingTimeout, setLookingTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
-
+  
   const onMouseHover = () => {
     setLookingTimeout(setTimeout(() => change("look"), 500));
   };

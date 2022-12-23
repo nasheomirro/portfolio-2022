@@ -9,7 +9,7 @@ export function formatDate(date: Date) {
   return strTime;
 }
 
-export function addElapsedTime(pastDate: Date, otherDate: Date): string {
-  let elapsedTime = new Date().getTime() - pastDate.getTime();
-  return formatDate(new Date(otherDate.getTime() + elapsedTime));
+export function addTime(date: Date, ms: number): string {
+  date.setTime(date.getTime() + ms);
+  return formatDate(date);
 }
