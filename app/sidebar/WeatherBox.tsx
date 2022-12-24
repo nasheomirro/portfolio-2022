@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import { useWeatherStore, WeatherType } from "~/stores/weather";
+import { withErrorBoundary } from "react-error-boundary";
+import { useWeatherStore } from "~/stores/weather";
 import PhilippineTime from "./PhilippineTime";
+import WeatherFallback from "./WeatherFallback";
 
 const Details: React.FC = () => {
   const weather = useWeatherStore((state) => state.current);
@@ -49,4 +51,4 @@ const Details: React.FC = () => {
   );
 };
 
-export default Details;
+export default withErrorBoundary(Details, { fallback: <WeatherFallback /> });

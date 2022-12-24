@@ -45,9 +45,9 @@ export const useWeatherStore: ContextHook<WeatherState> = (
 };
 
 export const WeatherProvider: React.FC<
-  PropsWithChildren<{ value: WeatherType }>
+  PropsWithChildren<{ value: WeatherType | null }>
 > = ({ value, children }) => {
-  const store = useRef(createWeatherStore(value)).current;
+  const store = useRef(value && createWeatherStore(value)).current;
   return (
     <weatherContext.Provider value={store}>{children}</weatherContext.Provider>
   );

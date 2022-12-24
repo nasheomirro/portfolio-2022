@@ -20,9 +20,9 @@ export const useTimeStore: ContextHook<TimeState> = (selector, equalityFn?) => {
   return useStore(store, selector, equalityFn);
 };
 export const TimeProvider: React.FC<
-  React.PropsWithChildren<{ value: string }>
+  React.PropsWithChildren<{ value: string | null }>
 > = ({ children, value }) => {
-  const store = useRef(createTimeStore(value)).current;
+  const store = useRef(value === null ? null : createTimeStore(value)).current;
   return (
     <timeStoreContext.Provider value={store}>
       {children}

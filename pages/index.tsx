@@ -6,8 +6,8 @@ import { fetchCurrentTimeData } from "~/stores/current-time/data";
 import { TimeProvider } from "~/stores/current-time";
 
 type Props = {
-  weather: WeatherType;
-  time: string;
+  weather: WeatherType | null;
+  time: string | null;
 };
 
 export default function Home({ weather, time }: Props) {
@@ -28,9 +28,20 @@ export async function getServerSideProps() {
   const fetchWeather = fetchWeatherData();
   const fetchTime = fetchCurrentTimeData();
 
-  // then wait for each
-  const weather = await fetchWeather;
-  const time = await fetchTime;
+  const payload: Props = {
+    time: null,
+    weather: null,
+  };
 
-  return { props: { weather, time } };
+  // then wait for each, do nothing if error
+  try {
+    const weather = await fetchWeather;
+    payload.weather = weather;
+  } catch {}
+  try {
+    const time = await fetchTime;
+    payload.time = time;
+  } catch {}
+
+  return { props: payload };
 }

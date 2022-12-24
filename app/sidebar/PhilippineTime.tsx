@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useTimeStore } from "~/stores/current-time";
+import { withErrorBoundary } from "react-error-boundary";
 import { addTime, formatDate } from "./utils";
 
 const PhilippineTime: React.FC = () => {
@@ -16,6 +17,7 @@ const PhilippineTime: React.FC = () => {
 
     const tick = (ms: number) => setTime(addTime(time, ms));
 
+    // coded this way for idempotence
     let interval = setInterval(() => {
       tick(ms);
       clearInterval(interval);
@@ -32,4 +34,4 @@ const PhilippineTime: React.FC = () => {
   );
 };
 
-export default PhilippineTime;
+export default withErrorBoundary(PhilippineTime, { fallback: null });
