@@ -19,11 +19,11 @@ export type WeatherType = {
 };
 
 type WeatherState = {
-  current: WeatherType;
+  current: WeatherType | null;
   setCurrent: Action<WeatherType>;
 };
 
-const createWeatherStore = (weather: WeatherType) =>
+const createWeatherStore = (weather: WeatherType | null) =>
   createStore<WeatherState>()((set) => ({
     current: weather,
     setCurrent: (payload) => {
@@ -31,24 +31,38 @@ const createWeatherStore = (weather: WeatherType) =>
     },
   }));
 
-export const weatherContext = createContext<StoreApi<WeatherState> | null>(
-  null
-);
-
+export const weatherContext = createContext<StoreApi<WeatherState>>({} as any);
 export const useWeatherStore: ContextHook<WeatherState> = (
   selector,
   equalityFn?
 ) => {
   const store = useContext(weatherContext);
-  if (!store) throw new Error("Missing TimeStore.Provider parent");
   return useStore(store, selector, equalityFn);
 };
 
 export const WeatherProvider: React.FC<
   PropsWithChildren<{ value: WeatherType | null }>
 > = ({ value, children }) => {
-  const store = useRef(value && createWeatherStore(value)).current;
+  const store = useRef(createWeatherStore(value)).current;
   return (
     <weatherContext.Provider value={store}>{children}</weatherContext.Provider>
   );
+};
+
+/**
+ * HOC for getting the current weather object, a Fallback component must be provided if when
+ * weather was not passed in.
+ */
+export const withWeatherProps = (
+  Component: React.FC<{ weather: WeatherType }>,
+  Fallback: React.FC
+) => {
+  const _Component: React.FC = () => {
+    const weather = useWeatherStore((state) => state.current);
+    if (weather === null) {
+      return <Fallback />;
+    }
+    return <Component weather={weather} />;
+  };
+  return _Component;
 };

@@ -2,8 +2,8 @@ import Sidebar from "~/app/sidebar";
 import Main from "~/app/main";
 import { fetchWeatherData } from "~/stores/weather/data";
 import { WeatherProvider, WeatherType } from "~/stores/weather";
-import { fetchCurrentTimeData } from "~/stores/current-time/data";
-import { TimeProvider } from "~/stores/current-time";
+import { fetchCurrentTimeData } from "~/stores/fetched-time/data";
+import { TimeProvider } from "~/stores/fetched-time";
 
 type Props = {
   weather: WeatherType | null;

@@ -1,4 +1,4 @@
-const WeatherFallback = () => {
+const DetailsFallback = () => {
   return (
     <div>
       Whoops, either my website exceeded the API&apos;s limits or the API is
@@ -7,4 +7,4 @@ const WeatherFallback = () => {
   );
 };
 
-export default WeatherFallback;
+export default DetailsFallback;

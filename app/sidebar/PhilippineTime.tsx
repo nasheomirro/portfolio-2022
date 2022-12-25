@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { useTimeStore } from "~/stores/current-time";
-import { withErrorBoundary } from "react-error-boundary";
+import { withFetchedTimeProps } from "~/stores/fetched-time";
 import { addTime, formatDate } from "./utils";
 
-const PhilippineTime: React.FC = () => {
-  const fetchedTime = useTimeStore((state) => state.current);
+const PhilippineTime: React.FC<{ fetchedTime: string }> = ({ fetchedTime }) => {
   const timeRef = useRef(new Date(fetchedTime));
-
   const [time, setTime] = useState(formatDate(timeRef.current));
 
   useEffect(() => {
@@ -34,4 +31,4 @@ const PhilippineTime: React.FC = () => {
   );
 };
 
-export default withErrorBoundary(PhilippineTime, { fallback: null });
+export default withFetchedTimeProps(PhilippineTime, () => null);

@@ -1,14 +1,12 @@
 import Image from "next/image";
 import React from "react";
-import { withErrorBoundary } from "react-error-boundary";
-import { useWeatherStore } from "~/stores/weather";
+import { WeatherType, withWeatherProps } from "~/stores/weather";
 import PhilippineTime from "./PhilippineTime";
-import WeatherFallback from "./WeatherFallback";
+import DetailsFallback from "./DetailsFallback";
 
-const Details: React.FC = () => {
-  const weather = useWeatherStore((state) => state.current);
+const Details: React.FC<{ weather: WeatherType }> = ({ weather }) => {
   return (
-    <div className="py-4 px-2">
+    <div>
       <span className="text-lg text-primary-100 font-bold mb-2 inline-block">
         what it&apos;s like in my place
       </span>
@@ -51,4 +49,4 @@ const Details: React.FC = () => {
   );
 };
 
-export default withErrorBoundary(Details, { fallback: <WeatherFallback /> });
+export default withWeatherProps(Details, DetailsFallback);
