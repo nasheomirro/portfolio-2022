@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  @font-face {
-    font-family: "Inter";
-    src: url("/inter-var.ttf") format("truetype");
-  }
-}
-
 html {
-  @apply font-default bg-background-300 text-white
+  @apply bg-background-300 text-white
 }

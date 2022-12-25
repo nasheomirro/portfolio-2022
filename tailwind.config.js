@@ -29,9 +29,7 @@ module.exports = {
       white: "#fff",
       transparent: "#00000000",
     },
-    fontFamily: {
-      default: ["Inter", "sans-serif"],
-    },
+    fontFamily: {},
   },
   plugins: [],
 };
