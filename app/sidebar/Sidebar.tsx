@@ -11,7 +11,7 @@ const Sidebar: React.FC = () => {
       <Avatar />
       <div
         className={twMerge(
-          "transition-all ease-in-out bg-background-200 rounded-lg mt-4 p-4",
+          "transition-all ease-in-out bg-background-100 rounded-lg mt-4 p-4 border-4 border-background-200",
           isAtTop ? "-translate-x-10 opacity-0" : "opacity-100 translate-x-0"
         )}
       >

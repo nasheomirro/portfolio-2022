@@ -1,0 +1,5 @@
+.doggoBody {
+  background-image: url("/doggo/doggo_body.jpg");
+  background-repeat: repeat-y;
+  background-size: contain;
+}

@@ -1,4 +1,14 @@
-export function formatDate(date: Date) {
+export function formatDate(date: Date): string {
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  const month = monthNames[date.getMonth()];
+  const day = date.getDate();
+  const year = date.getFullYear();
+  return `${month} ${day}, ${year}`;
+}
+
+export function formatToHours(date: Date) {
   let hours = date.getHours();
   let minutes: string | number = date.getMinutes();
   let ampm = hours >= 12 ? "PM" : "AM";
@@ -11,5 +21,5 @@ export function formatDate(date: Date) {
 
 export function addTime(date: Date, ms: number): string {
   date.setTime(date.getTime() + ms);
-  return formatDate(date);
+  return formatToHours(date);
 }

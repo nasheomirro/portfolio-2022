@@ -6,7 +6,11 @@ module.exports = {
     "./app/**/*.{ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridAutoRows: {
+        "uniform": "1fr",
+      }
+    },
     colors: {
       background: {
         300: "#0f0e0a",

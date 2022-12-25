@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { withFetchedTimeProps } from "~/stores/fetched-time";
-import { addTime, formatDate } from "./utils";
+import { addTime, formatToHours } from "./utils";
 
 const PhilippineTime: React.FC<{ fetchedTime: string }> = ({ fetchedTime }) => {
   const timeRef = useRef(new Date(fetchedTime));
-  const [time, setTime] = useState(formatDate(timeRef.current));
+  const [time, setTime] = useState(formatToHours(timeRef.current));
 
   useEffect(() => {
     const time = timeRef.current;
@@ -27,7 +27,7 @@ const PhilippineTime: React.FC<{ fetchedTime: string }> = ({ fetchedTime }) => {
   }, [timeRef, setTime]);
 
   return (
-    <span className="text-lg font-thin text-highlight-yellow">{time}</span>
+    <span className="text-lg font-bold">{time}</span>
   );
 };
 
