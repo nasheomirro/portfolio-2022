@@ -1,8 +1,10 @@
 import { twMerge } from "tailwind-merge";
 import useScrolledToTop from "~/hooks/useScrolledToTop";
+import Contact from "./Contact";
 import Description from "./Description";
 import Header from "./Header";
 import Posts from "./Posts";
+import Projects from "./Projects";
 
 const Main: React.FC = () => {
   const isAtTop = useScrolledToTop();
@@ -20,8 +22,9 @@ const Main: React.FC = () => {
       >
         <Description />
         <Posts />
+        <Projects />
+        <Contact />
       </main>
-      <div className="h-screen" />
     </div>
   );
 };

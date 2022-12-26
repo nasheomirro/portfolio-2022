@@ -4,7 +4,7 @@ import PostItem from "./PostItem";
 
 const Posts: React.FC<{ posts: Posts }> = ({ posts }) => {
   return (
-    <div>
+    <div className="mb-32">
       <h2 className="text-xl md:text-2xl font-bold text-primary-100 mb-4">
         My Recent Posts
       </h2>
@@ -24,10 +24,10 @@ const Posts: React.FC<{ posts: Posts }> = ({ posts }) => {
 
 export default withBlogPostProps(Posts, () => (
   <div className="">
-    <p>
+    {/* <p>
       Huh, that&apos;s weird, DEV.to API is currently down at the moment, If you
       reaaally want to see my blog posts you can check my profile, or try
       hitting that refresh button
-    </p>
+    </p> */}
   </div>
 ));

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useScrolledToTop = () => {
-  const [isAtTop, setIsAtTop] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   useEffect(() => {
     const listener = () => {
       if (window.scrollY < 100) {
